@@ -11,7 +11,6 @@ export default function DayListItem(props) {
     props.spots ? `${props.spots} spot${props.spots > 1 ? "s" : ""} remaining`: `no spots remaining`
   )
   
-  // const spotString = classNames(`${props.spots}`,{'no spots remaining': props.spots === 0, '1 spot remaining': props.spots === 1, '2 spots remaining': props.spots === 2});
   const dayClass = classNames('day-list__item',{'day-list__item--selected': props.selected, 'day-list__item--full': props.spots === 0});
   return (
     <li onClick={() => props.setDay(props.name)}>
