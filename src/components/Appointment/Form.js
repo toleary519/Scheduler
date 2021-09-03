@@ -5,15 +5,27 @@ import Button from "components/Button";
 
 export default function Form(props) {
   const [name, setName] = useState(props.name || "")
-  const [interviewer, setInterviewer] = useState(props.interviewer || 1)
+  const [interviewer, setInterviewer] = useState(props.interviewer || null)
+
+  function reset(){
+    setName("")
+    setInterviewer(null)
+  }
+
+  function cancel(){
+    reset();
+    props.onCancel()
+  }
 
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off">
-          <input onSubmit={event => event.preventDefault()}
+        <form autoComplete="off" onSubmit={event => event.preventDefault()}>
+          <input 
             className="appointment__create-input text--semi-bold"
-            name={name}
+            name="name"
+            value={name}
+            onChange={event => setName(event.target.value)}
             type="text"
             placeholder="Enter Student Name"
             /*
@@ -26,8 +38,8 @@ export default function Form(props) {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button onClick={event => event.setName("")} danger>Cancel</Button>
-          <Button onClick={props.onSave} confirm>Save</Button>
+          <Button onClick={cancel} danger>Cancel</Button>
+          <Button onClick={props.onSave(name, interviewer)} confirm>Save</Button>
         </section>
       </section>
     </main>
