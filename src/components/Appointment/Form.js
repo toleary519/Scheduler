@@ -21,12 +21,12 @@ export default function Form(props) {
             */
           />
         </form>
-        {interviewer.name}
-        <InterviewerList interviewers={props.interviewers} value={props.id} setInterviewer={setInterviewer} />
+        
+        <InterviewerList interviewers={props.interviewers} value={interviewer} setInterviewer={setInterviewer} />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button onClick={event => event.setName(""), event => event.setInterviewer(null)} danger>Cancel</Button>
+          <Button onClick={event => event.setName("")} danger>Cancel</Button>
           <Button onClick={props.onSave} confirm>Save</Button>
         </section>
       </section>
