@@ -1,21 +1,24 @@
-
 import React, { useState } from "react";
 import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
 export default function Form(props) {
-  const [name, setName] = useState(props.interview !== null ? props.interview.student: "")
-  const [interviewer, setInterviewer] = useState(props.interview !== null ? props.interview.interviewer.id: null)
+  const [name, setName] = useState(
+    props.interview !== null ? props.interview.student : ""
+  );
+  const [interviewer, setInterviewer] = useState(
+    props.interview !== null ? props.interview.interviewer.id : null
+  );
 
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off" onSubmit={event => event.preventDefault()}>
-          <input 
+        <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
+          <input
             className="appointment__create-input text--semi-bold"
             name="name"
             value={name}
-            onChange={event => setName(event.target.value)}
+            onChange={(event) => setName(event.target.value)}
             type="text"
             placeholder="Enter Student Name"
             /*
@@ -23,16 +26,23 @@ export default function Form(props) {
             */
           />
         </form>
-        
-        <InterviewerList interviewers={props.interviewers} value={interviewer} setInterviewer={setInterviewer} />
+
+        <InterviewerList
+          interviewers={props.interviewers}
+          value={interviewer}
+          setInterviewer={setInterviewer}
+        />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button onClick={() => props.onCancel()} danger>Cancel</Button>
-          <Button onClick={() => props.save(name, interviewer)} confirm>Save</Button>
+          <Button onClick={() => props.onCancel()} danger>
+            Cancel
+          </Button>
+          <Button onClick={() => props.save(name, interviewer)} confirm>
+            Save
+          </Button>
         </section>
       </section>
     </main>
-  )
-
+  );
 }
