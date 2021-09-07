@@ -7,12 +7,14 @@ import Empty from "./Empty";
 import useVisualMode from 'hooks/useVisualMode';
 import Form from './Form';
 import Status from './Status';
+import Confirm from './Confirm';
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
-// const DELETING = "DELETING"
+const CONFIRM = "CONFIRM";
+const DELETING ="DELETING";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -26,18 +28,20 @@ export default function Appointment(props) {
     };
     transition(SAVING);
     props.bookInterview(props.id, interview)
-    .then(() => transition(SHOW));
-  }
+    .then(() => transition(SHOW))
+    .catch(err => console.log("save catch:", err));
+  };
   
-  // function delete(name, interviewer) {
-  //   const interview = {
-  //     student: name,
-  //     interviewer
-  //   };
-  //   transition(SAVING);
-  //   props.bookInterview(props.id, interview)
-  //   .then(() => transition(SHOW));
-  // }
+  function cancel(name, interviewer) {
+   transition(DELETING)
+    const interview = {
+      student: name,
+      interviewer
+    };
+    props.cancelInterview(props.id, interview)
+    .then(() => transition(EMPTY))
+    .catch(err => console.log("cancel catch:", err));
+  };
 
   return (
     <article className="appointment">
@@ -47,6 +51,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete={() => transition(CONFIRM)}
         />
       )}
       {mode === CREATE && (
@@ -54,13 +59,24 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel={() => back(EMPTY)}
           save={save}
-          // delete={delete}
-          onSave={() => transition(SHOW)}
-          // onDelete={() => transition(CONFIRM)}
         />
       )}
-      {mode=== SAVING && (
-        <Status />
+      {mode === SAVING && (
+        <Status
+          message={"Saving appointment..."}
+        />
+      )}
+      {mode === DELETING && (
+        <Status
+          message={"Deleting Appointment..."}
+        />
+      )}
+      {mode === CONFIRM && (
+        <Confirm
+          message={"Are you sure you would like to delete?"}
+          onCancel={() => back()}
+          onConfirm={cancel}
+        />
       )}
     </article>
   )
