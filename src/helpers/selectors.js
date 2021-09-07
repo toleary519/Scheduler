@@ -14,6 +14,7 @@ export function getAppointmentsForDay(state, day) {
 export function getInterview(state, interview) {
 
   if (!interview) {
+    console.log("are we hit:", interview)
     return null;
   }
   const getInterviewOutput = {
