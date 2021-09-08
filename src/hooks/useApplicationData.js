@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
@@ -8,6 +8,16 @@ export default function useApplicationData() {
     appointments: {},
     interviewers: {},
   });
+
+  const updateDay = (value) => {
+    const newDays = [...state.days];
+    for (const ind in newDays) {
+      if (state.day === newDays[ind].name) {
+        newDays[ind].spots = newDays[ind].spots + value;
+      }
+    }
+    return newDays;
+  };
 
   const setDay = (day) => setState({ ...state, day });
 
@@ -38,7 +48,8 @@ export default function useApplicationData() {
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then((res) => {
-        setState({ ...state, appointments });
+        const newAppt = updateDay(-1);
+        setState({ ...state, appointments, days: newAppt });
       });
   }
 
@@ -56,7 +67,8 @@ export default function useApplicationData() {
         interview: null,
       })
       .then((res) => {
-        setState({ ...state, appointments });
+        const removeAppt = updateDay(1);
+        setState({ ...state, appointments, days: removeAppt });
       });
   }
 
