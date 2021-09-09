@@ -50,6 +50,7 @@ export default function Appointment(props) {
       .then(() => transition(EMPTY))
       .catch(() => transition(ERROR_DELETE, true));
   }
+  //uses the useVisualMode hook to switch between the different appointment views
   return (
     <article className="appointment">
       <Header time={props.time} />

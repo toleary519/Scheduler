@@ -1,23 +1,24 @@
-# Interview Scheduler
+## Interview Scheduler
 
-## Setup
+Interview Scheduler is a single-page scheduling app where a can book edit and delete appointments for a given week.
 
-Install dependencies with `npm install`.
+Interview Scheduler uses React and SCSS, as well as Jest and Cypress for testing.
 
-## Running Webpack Development Server
+## Getting Started
 
-```sh
-npm start
-```
+1. Fork this repository, then clone your fork of this repository.
+2. Install dependencies using the `npm install` command.
+3. Start the web server using the `npm start` command. The app will be served at <http://localhost:8080/>.
+   Go to <http://localhost:8080/> in your browser.
 
-## Running Jest Test Framework
+!["Thomas Setting Appointment"]()
+!["Jamal Saved Appointment"]()
+!["Student Name Error"]()
 
-```sh
-npm test
-```
+## Dependencies
 
-## Running Storybook Visual Testbed
-
-```sh
-npm run storybook
-```
+- React
+- axios
+- @testing-library/react-hooks
+- react-test-renderer
+- Node 5.10.x or above

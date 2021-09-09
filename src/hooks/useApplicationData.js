@@ -10,6 +10,7 @@ export default function useApplicationData() {
     spots: {},
   });
 
+  //function to update the spot counter in side bar: does not mutate original
   function updateSpots(state, appointments) {
     const dayObj = state.days.find((d) => d.name === state.day);
     let spots = 0;
