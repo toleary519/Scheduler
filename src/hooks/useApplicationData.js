@@ -7,20 +7,18 @@ export default function useApplicationData() {
     days: [],
     appointments: {},
     interviewers: {},
+    spots: {},
   });
 
   function updateSpots(state, appointments) {
     const dayObj = state.days.find((d) => d.name === state.day);
-    // console.log(dayObj);
     let spots = 0;
     for (const id of dayObj.appointments) {
       const appointment = appointments[id];
-      // console.log("appt:", appointment);
       if (!appointment.interview) {
         spots++;
       }
     }
-    // console.log("spots = ", spots);
     const newDay = { ...dayObj, spots };
     const newDays = state.days.map((d) => (d.name === state.day ? newDay : d));
     return newDays;
@@ -55,9 +53,8 @@ export default function useApplicationData() {
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then((res) => {
-        console.log("hit");
-        setState({ ...state, appointments });
-        updateSpots(state, appointments);
+        const days = updateSpots(state, appointments);
+        setState({ ...state, appointments, days });
       });
   }
 
@@ -75,10 +72,10 @@ export default function useApplicationData() {
         interview: null,
       })
       .then((res) => {
-        setState({ ...state, appointments });
-        updateSpots(state, appointments);
+        const days = updateSpots(state, appointments);
+        setState({ ...state, appointments, days });
       });
   }
 
-  return { state, setDay, bookInterview, cancelInterview };
+  return { state, setDay, bookInterview, cancelInterview, updateSpots };
 }
