@@ -2,7 +2,7 @@
 
 Interview Scheduler is a single-page scheduling app where one can book, edit or delete appointments for a given week.
 
-Interview Scheduler primarily uses React and SCSS, as well as Jest and Cypress for testing.
+Interview Scheduler primarily uses React, JSX and SCSS, as well as Jest and Cypress for testing.
 
 ## Getting Started
 
