@@ -11,9 +11,9 @@ Interview Scheduler uses React and SCSS, as well as Jest and Cypress for testing
 3. Start the web server using the `npm start` command. The app will be served at <http://localhost:8080/>.
    Go to <http://localhost:8080/> in your browser.
 
-!["Thomas Setting Appointment"]()
-!["Jamal Saved Appointment"]()
-!["Student Name Error"]()
+!["Thomas Setting Appointment"](https://github.com/toleary519/scheduler/blob/master/docs/Thomas-setting-appt.png?raw=true)
+!["Jamal Saved Appointment"](https://github.com/toleary519/scheduler/blob/master/docs/Jamal-saved.png?raw=true)
+!["Student Name Error"](https://github.com/toleary519/scheduler/blob/master/docs/trigger-error-warning.png?raw=true)
 
 ## Dependencies
 
